@@ -1,29 +1,24 @@
 %{?nodejs_find_provides_and_requires}
 %global packagename tap-parser
 %global enable_tests 1
-Name:		nodejs-tap-parser
-Version:	1.2.2
-Release:	1
-Summary:	Parse the test anything protocol
-License:	MIT
-URL:		https://github.com/substack/tap-parser.git
-Source0:	https://registry.npmjs.org/%{packagename}/-/%{packagename}-%{version}.tgz
-#wget https://github.com/substack/tap-parser.git
-#cd tap-parser
-#git archive --prefix='test/' --format=tar v1.2.2:test/  | bzip2 >  tests-1.2.2.tar.bz2
-Source1:	tests-%{version}.tar.bz2
-ExclusiveArch:	%{nodejs_arches} noarch
-BuildArch:	noarch
-BuildRequires:       	nodejs-packaging
+Name:           nodejs-tap-parser
+Version:        1.2.2
+Release:        1
+Summary:        Parse the test anything protocol
+License:        MIT
+URL:            https://github.com/substack/tap-parser.git
+Source0:        https://github.com/substack/tap-parser/archive/v%{version}.tar.gz
+ExclusiveArch:  %{nodejs_arches} noarch
+BuildArch:      noarch
+BuildRequires:  nodejs-packaging
 %if 0%{?enable_tests}
-BuildRequires:       	npm(events-to-array) 	npm(glob) 	npm(js-yaml) 	npm(tap) 	npm(tape)
+BuildRequires:  npm(events-to-array) npm(glob) npm(js-yaml) npm(tap) npm(tape)
 %endif
 %description
 Parse the test anything protocol.
 
 %prep
-%setup -q -n package
-%setup -q -T -D -a 1 -n package
+%autosetup -n tap-parser-%{version}
 %nodejs_fixdep -r inherits
 
 %build
